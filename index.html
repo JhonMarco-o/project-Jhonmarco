@@ -4,23 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>GREEK GODS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <style>
-    body {
-        background: url('https://wallpapers.com/images/featured/dark-forest-background-ncekxir0j5a9qd8k.webp') no-repeat center/cover;
-        position: relative;
-    }
-    
-    body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: -1;
-    }
-    
     .card {
         background: rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(12px);
@@ -28,33 +15,88 @@
         border: 1px solid rgb(255, 255, 255);
     }
     
+    .hero {
+        position: relative;
+        height: 1000px;
+        overflow: visible;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        backdrop-filter: blur(1px);
+        transition: background 0.9s ease-in-out;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+    }
+    
+    .slider-wrapper {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .slider {
+        position: relative;
+        width: 100%;
+        max-width: 700px;
+        height: 260px;
+    }
+    
+    .card-item {
+        background: rgba(255, 255, 255, 0.605);
+        position: absolute;
+        width: 170px;
+        height: 250px;
+        left: 50%;
+        top: 20%;
+        transform: translate(-50%, -50%);
+        border-radius: 15px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        box-shadow: 0 10px 30px rgb(0, 0, 0);
+        transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+    
+    .card-item:hover {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    
     .carousel {
         position: relative;
         width: 100%;
-        height: 260px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
+        max-width: 700px;
+        margin: auto;
     }
     
-    .carousel-track {
+    .controlers {
+        position: absolute;
+        top: 60%;
+        left: 0;
+        width: 100%;
+        transform: translateY(-50%);
         display: flex;
-        transition: transform 0.6s ease;
+        justify-content: space-between;
+        z-index: 20;
+        pointer-events: none;
     }
     
     .carousel-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(255, 255, 255, 0.2);
+        pointer-events: all;
+        background: rgba(0, 0, 0, 0.6);
         border: none;
         color: white;
-        font-size: 24px;
-        padding: 8px 12px;
+        font-size: 18px;
+        padding: 12px 16px;
         border-radius: 50%;
-        cursor: pointer;
-        z-index: 3;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.6);
+        transition: 0.3s;
     }
     
     .carousel-btn:hover {
@@ -68,13 +110,21 @@
     .next {
         right: 10px;
     }
+    
+    @media (max-width: 576px) {
+        .card-item {
+            width: 110px;
+            height: 160px;
+        }
+    }
 </style>
 
-<body>
+<body class="hero" id="hero">
+
+
+
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
-
-
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -90,29 +140,312 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-xl-5">
-                <div class="card my-2 shadow rounded-5 text-light p-4 py-xl-4">
-                    <form class="d-flex" role="search">
-                        <div class="h2 text-center"></div>
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                <div class="card my-2 shadow rounded-5 text-light p-3">
+                    <form class="d-flex" role="search" id="searchForm">
+                        <input class="form-control me-2" type="search" placeholder="Search Greek God..." aria-label="Search" id="searchInput" />
+
+                        <button class="btn btn-outline-success" type="submit">
+                            Search
+                        </button>
                     </form>
                 </div>
             </div>
-        </div>
-        <div class="col-12 col-xl-12 mt-3">
-            <div class="card shadow rounded-5 text-light p-4">
-                <h2 class="text-center mb-2">HERO STORIES</h2>
+            <div class="col-12 col-xl-12 mt-2">
+                <div class="card shadow rounded-5 text-light p-2 mb-2">
+                    <h2 class="text-center mb-2">GREEK GODS</h2>
+                </div>
             </div>
-            <div class="carousel mt-5">
-                <button class="carousel-btn prev">&#10094;</button>
-                <div class="carousel-track" id="track"></div>
-                <button class="carousel-btn next">&#10095;</button>
+            <div class="col-12 col-xl-12 col-sm-12 mt-5 mb-5">
+                <div class="hero-content text-light">
+                    <h1 id="title">Loading...</h1>
+                    <p id="desc">Fetching data...</p>
+                </div>
+            </div>
+            <div class="col-12 col-xl-12 col-sm-12 col-md-12  p-5">
+                <div class="carousel mt-3">
+                    <div class="slider-wrapper">
+                        <div class="slider" id="slider"></div>
+                    </div>
+                </div>
+
+
+                <div class="controlers p-5">
+                    <button class="carousel-btn prev" id="prev">&#10094;</button>
+                    <button class="carousel-btn next" id="next">&#10095;</button>
+                </div>
             </div>
         </div>
+    </div>
 
 
+    <script>
+        const hero = document.getElementById("hero");
+        const title = document.getElementById("title");
+        const desc = document.getElementById("desc");
+        const slider = document.getElementById("slider");
+        const godImages = {
+            Zeus: "https://i.pinimg.com/736x/82/cb/8d/82cb8df543d9f11b98831a9bd8de21de.jpg",
+            Hades: "https://i.pinimg.com/736x/3f/4d/7c/3f4d7c38517af8bdcc8657a8b49eca25.jpg",
+            Poseidon: "https://i.pinimg.com/736x/4c/51/d8/4c51d8b611bf4bc60f59246083c1ecb4.jpg",
+            Athena: "https://i.pinimg.com/736x/bb/7d/67/bb7d67325757775b76eee95392cf4d6e.jpg",
+            Hestia: "https://i.pinimg.com/736x/c0/7d/33/c07d3389832e10c8585b3414fd27719c.jpg",
+            Apollo: "https://i.pinimg.com/736x/7c/b3/5f/7cb35f70565c5a484f709ef14128af42.jpg",
+            Artemis: "https://i.pinimg.com/736x/5c/66/16/5c66165abdbbdbbce5fb6717dc096872.jpg",
+            Demeter: "https://i.pinimg.com/736x/7d/3b/58/7d3b587e636149c43512e242b1125ec6.jpg",
+            Aphrodite: "https://i.pinimg.com/736x/bc/0c/8f/bc0c8f8813b6b6b1948cb304d24dab4d.jpg",
+            Hera: "https://i.pinimg.com/736x/1e/7d/b4/1e7db46577834dc436bbe6fb711bbee5.jpg",
+            Dionysus: "https://i.pinimg.com/736x/eb/a3/4c/eba34c6db2bee0899fcd9bf514c7e884.jpg",
+            Ares: "https://i.pinimg.com/736x/1a/c5/a3/1ac5a3e35a4c9aa679631f63226c45a7.jpg",
+            Hephaestus: "https://i.pinimg.com/736x/d7/58/86/d7588658d35deda7c22ae5d723acbff7.jpg",
+            Persephone: "https://i.pinimg.com/736x/03/f0/03/03f0031c15121d6f360d4d81a4c3d3d8.jpg",
+            Hermes: "https://i1-c.pinimg.com/736x/fd/e3/29/fde32990f4f55ab9728aac39fbbefc08.jpg",
+            Pan: "https://i.pinimg.com/736x/0d/1f/a0/0d1fa09b7bd5d54dfd86ec188a07ed2b.jpg",
+            Nyx: "https://i.pinimg.com/736x/83/7c/78/837c78e491ee41ad226eaae5d05d6610.jpg",
+            Cupid: "https://i.pinimg.com/736x/8f/84/e4/8f84e4fce8dc14e3f9dfe773436f6d24.jpg",
+            Nemesis: "https://i.pinimg.com/736x/7a/82/c8/7a82c834cd2b12c4d2c68081c7c83173.jpg",
+            Aeolus: "https://i.pinimg.com/736x/b3/56/a2/b356a2374a0dd69d7f4f86089591c427.jpg",
+            Boreas: "https://i.pinimg.com/736x/fb/3f/20/fb3f2053ee57abf118a6175d260bf152.jpg",
+            Zephyrus: "https://i1-c.pinimg.com/1200x/fa/c3/27/fac327ab31cd58203c2862333ee84c6f.jpg",
+            Eurus: "https://i.pinimg.com/736x/e1/3e/8f/e13e8f2fd505cc026fb2e7d417e30eb7.jpg",
+            Notus: "https://i.pinimg.com/736x/90/64/2a/90642a9feb863da94ddf98b971c68f34.jpg",
+            Eos: "https://i1-c.pinimg.com/736x/6b/bc/73/6bbc73adaab3996f74aacaca7f664e90.jpg",
+            Iris: "https://i1-c.pinimg.com/736x/78/77/01/787701d6e93a3f22941c5bd2b078a7fd.jpg",
+            Tyche: "https://i.pinimg.com/736x/30/5d/52/305d52eff5aa6c955eb4fb595bd9ebf7.jpg",
+            Nike: "https://i1-c.pinimg.com/1200x/c1/a3/7b/c1a37b7f975e5f0bbeee836c71685e36.jpg",
+            Hebe: "https://i.pinimg.com/736x/56/a0/e0/56a0e00f4e36dcc0406a1548b3715506.jpg",
+            Asclepius: "https://i.pinimg.com/736x/b3/1a/53/b31a53ba6b05b8135f272b63182ff038.jpg",
+            Hypnos: "https://i.pinimg.com/736x/6d/81/f0/6d81f0d343c82758b7add0c5b935b340.jpg",
+            Erebus: "https://i1-c.pinimg.com/736x/a5/e2/f1/a5e2f1c27404206ffd45c621e16c9464.jpg",
+            Gaia: "https://i.pinimg.com/736x/45/0e/9c/450e9c677a39e7e00bc147254aca60d6.jpg",
+            Uranus: "https://i.pinimg.com/736x/40/7c/bf/407cbf826014657ae3c505ef0ac81999.jpg",
+            Thanatos: "https://i.pinimg.com/736x/e4/30/b8/e430b887fefe3f9f198d83629f9dd720.jpg",
+            Hecate: "https://i.pinimg.com/736x/eb/49/4f/eb494fd9a44b418a2eb59973eb85ec61.jpg",
+            Janus: "https://i1-c.pinimg.com/1200x/78/8b/c0/788bc009085006baf961733a5a279a4f.jpg",
+            Morpheus: "https://i.pinimg.com/736x/c9/47/76/c94776f187b728d409bbba76ff91b42c.jpg",
+            Eris: "https://i.pinimg.com/736x/1b/cd/33/1bcd33d4a19db1f7d1c3abd4863d0cba.jpg",
+            Psyche: "https://i1-c.pinimg.com/736x/f0/f3/c9/f0f3c94f8e391d1309974a9ebf6d4fcc.jpg",
+            Triton: "https://i.pinimg.com/736x/3d/e9/c8/3de9c83e5cc5802fe694a65762cbf398.jpg",
+            Amphitrite: "https://i.pinimg.com/736x/e8/36/82/e836820a3246461e5a537056701d9ac9.jpg",
+            Chaos: "https://i.pinimg.com/736x/05/63/93/056393b22460db5b228bfa52b5bd20e7.jpg",
+            Tartarus: "https://i.pinimg.com/736x/b6/0e/2d/b60e2d70266d28986140d4000f0d3c93.jpg",
+            Aether: "https://i.pinimg.com/736x/98/39/29/98392902b2f02d3747a44a39e8fd4d3f.jpg",
+            Hemera: "https://i.pinimg.com/736x/9e/5b/b5/9e5bb5bfe64950b85a11906c3886ad77.jpg",
+            Phobos: "https://i.pinimg.com/736x/48/d9/f9/48d9f9e36dbeab35c9d17c386bf777d8.jpg",
+            Deimos: "https://i.pinimg.com/736x/62/38/96/623896133b31b3e09a1dd8e240d8de7e.jpg",
+            Moirai: "https://i.pinimg.com/736x/8d/92/44/8d92444b7a8c31281b88c9297748bc66.jpg",
+            Muses: "https://i.pinimg.com/736x/0f/85/bb/0f85bb2d01ab38fc2692df1f4a498f3e.jpg",
+            Charites: "https://i.pinimg.com/736x/47/e2/00/47e200eee765dda230046059a53e02cb.jpg"
+        };
 
-        <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js " integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI " crossorigin="anonymous "></script>
+        const godBackgrounds = {
+            Zeus: "https://i1-e.pinimg.com/1200x/5e/8d/6a/5e8d6aee0f0de2fed4209f9e9e8f740c.jpg",
+            Hades: "https://i1-c.pinimg.com/1200x/0d/6e/a2/0d6ea2d16447dede878e332d1ca4decd.jpg",
+            Poseidon: "https://i1-e.pinimg.com/1200x/4d/66/06/4d6606a4606d2e0ee8386fbfeddf451f.jpg",
+            Athena: "https://i1-c.pinimg.com/736x/96/02/4d/96024d31f09bcdc841dda2639ee218e8.jpg",
+            Hestia: "https://i1-c.pinimg.com/736x/1e/e1/33/1ee133c9237e682820291925e3ac03dd.jpg",
+            Apollo: "https://i1-c.pinimg.com/736x/54/13/3b/54133bb392043409e93184539704860a.jpg",
+            Artemis: "https://i1-c.pinimg.com/736x/b4/85/a6/b485a601969226f3ad5ca1e2c1313e9c.jpg",
+            Demeter: "https://i.pinimg.com/736x/40/8d/92/408d92c7d3cb3050c8682edc499525f9.jpg",
+            Aphrodite: "https://i1-c.pinimg.com/736x/4f/22/e0/4f22e07bef100bd5b86ed89de3c25771.jpg",
+            Hera: "https://i1-c.pinimg.com/1200x/5b/52/08/5b5208eb8117621c49a67e8501880c81.jpg",
+            Dionysus: "https://i1-c.pinimg.com/1200x/7f/01/99/7f01992afb1e6e7d39c16ab49ff8d40f.jpg",
+            Ares: "https://i.pinimg.com/736x/ee/17/98/ee179805e1397e075bfaf9483b1ed5d5.jpg",
+            Hephaestus: "https://i1-c.pinimg.com/736x/de/4b/bb/de4bbb98c6c2fce172e3ab9efdb85e15.jpg",
+            Persephone: "https://i.pinimg.com/736x/e6/b8/89/e6b889255572bef17dcde0a2fdc96287.jpg",
+            Hermes: "https://i1-c.pinimg.com/736x/70/29/98/7029986f2afebbda373d5675347ce000.jpg",
+            Pan: "https://i1-c.pinimg.com/736x/d5/78/06/d5780605b5314747c6320582191e09f2.jpg",
+            Nyx: "https://i1-c.pinimg.com/736x/f6/c3/71/f6c37190925923a040d406802717b963.jpg",
+            Cupid: "https://i1-c.pinimg.com/736x/12/9d/33/129d3374c88d1e325ca725f158bb4e4c.jpg",
+            Nemesis: "https://i.pinimg.com/736x/f2/ee/af/f2eeafc6140f25c1913b66639b033397.jpg",
+            Aeolus: "https://i1-c.pinimg.com/736x/0a/a2/35/0aa235655c57d369e5fcb63e8c119e62.jpg",
+            Boreas: "https://i1-c.pinimg.com/736x/44/a7/a1/44a7a1fe4fcd1bb9ab3b9f2aae21fbd7.jpg",
+            Zephyrus: "https://i1-c.pinimg.com/1200x/b1/12/01/b112012300870512d7d34f88d1388063.jpg",
+            Eurus: "https://i1-c.pinimg.com/1200x/da/99/67/da99671ab46ec55f46ef632f14726274.jpg",
+            Notus: "https://i1-c.pinimg.com/736x/fd/60/b6/fd60b60a85c2588b9fe825df490daac2.jpg",
+            Eos: "https://i1-c.pinimg.com/736x/93/bf/49/93bf49fef74068d60d279eb15737d668.jpg",
+            Iris: "https://i1-c.pinimg.com/736x/19/13/3e/19133e2e4956f9375cee8639adaf955b.jpg",
+            Tyche: "https://i.pinimg.com/736x/64/63/10/6463103c5f1b8a112cf6126571c6794a.jpg",
+            Nike: "https://i.pinimg.com/736x/2d/bb/48/2dbb48e756f66f1b25bf1a318afda822.jpg",
+            Hebe: "https://i.pinimg.com/736x/0b/ca/f3/0bcaf3eaa98176918781eef8d39e158d.jpg",
+            Asclepius: "https://i.pinimg.com/736x/3d/c4/e6/3dc4e6554f7b4390c4ca59510a769513.jpg",
+            Hypnos: "https://i.pinimg.com/736x/8d/ec/5b/8dec5b13fade3f762bcff3d3ba44c96a.jpg",
+            Erebus: "https://i1-c.pinimg.com/736x/11/b3/d3/11b3d3cb2fa736b42cf943145243b42c.jpg",
+            Gaia: "https://i1-c.pinimg.com/736x/84/59/35/845935dca535391a49f92b5aa8dc53c2.jpg",
+            Uranus: "https://i1-c.pinimg.com/736x/ef/84/09/ef8409b1fe93ea82232909c513d9a304.jpg",
+            Thanatos: "https://i.pinimg.com/736x/25/14/b6/2514b664339a0d2fe39677508de0e095.jpg",
+            Hecate: "https://i.pinimg.com/736x/33/76/4a/33764ac68d92e343749b4de752d6bf12.jpg",
+            Janus: "https://i1-c.pinimg.com/1200x/e8/10/b6/e810b6bbdb40a9a4582b984c76a1cd48.jpg",
+            Morpheus: "https://i.pinimg.com/736x/c2/6f/81/c26f81044e356e8d45575f3fe2e6b224.jpg",
+            Eris: "https://i.pinimg.com/736x/b7/8c/d2/b78cd292b1259edab3c761da6d4f5024.jpg",
+            Psyche: "https://i1-c.pinimg.com/1200x/ae/46/b0/ae46b0db946f130517acb6dab789c03b.jpg",
+            Triton: "https://i.pinimg.com/736x/31/f7/6c/31f76c4aa6848c26b29ce9277f1b7cd4.jpg",
+            Amphitrite: "https://i1-c.pinimg.com/1200x/3c/b7/f6/3cb7f6c3d87ce40e69a1c2cd4ceb3385.jpg",
+            Chaos: "https://i.pinimg.com/736x/b3/21/c6/b321c68f6a1e842284861d37bdd5ca27.jpg",
+            Tartarus: "https://i.pinimg.com/736x/5d/29/1f/5d291f228d258b80aebf97e4ffbf209f.jpg",
+            Aether: "https://i1-c.pinimg.com/736x/a0/4c/83/a04c832a4129119dee984e9f0f9813cf.jpg",
+            Hemera: "https://i1-c.pinimg.com/736x/19/ca/64/19ca64aed17a6c99e8c752a891de2991.jpg",
+            Phobos: "https://i.pinimg.com/736x/bb/2b/37/bb2b37ea851a40b5fd0c528cdc6f619f.jpg",
+            Deimos: "https://i.pinimg.com/736x/24/3f/da/243fda5e9b48426b021babe60e6c38a1.jpg",
+            Moirai: "https://i.pinimg.com/736x/3c/07/54/3c0754c0a9ee22e2dc402f73128b2048.jpg",
+            Muses: "https://i.pinimg.com/736x/2b/89/06/2b8906a8c444a3a611e6a156485cd2f6.jpg",
+            Charites: "https://i.pinimg.com/736x/b9/4b/9e/b94b9e90421d9ce8e3e4775049cafd42.jpg"
+        };
+
+        let gods = [];
+        let allGods = [];
+        let index = 0;
+
+        async function loadGods() {
+            try {
+
+                const res = await fetch("https://thegreekmythapi.vercel.app/api/gods");
+                const data = await res.json();
+
+                console.log(data);
+
+                allGods = data.map(god => ({
+                    name: god.name,
+                    img: godImages[god.name],
+                    desc: god.description
+                }));
+
+                gods = [...allGods];
+
+                renderCards();
+
+            } catch (err) {
+                console.error("Error loading Gods:", err);
+            }
+        }
+
+
+        function renderCards() {
+            slider.innerHTML = "";
+
+            gods.forEach((p, i) => {
+                const card = document.createElement("div");
+                card.className = "card-item";
+                card.style.backgroundImage = `url(${p.img})`;
+
+                // Click to jump
+                card.addEventListener("click", () => {
+                    index = i;
+                    updateCarousel();
+                });
+
+                slider.appendChild(card);
+            });
+
+            updateCarousel();
+        }
+
+
+        function updateCarousel() {
+            const cards = document.querySelectorAll(".card-item");
+
+
+            const base = window.innerWidth;
+            let gap1 = base < 576 ? 100 : base < 768 ? 140 : 200;
+            let gap2 = base < 576 ? 180 : base < 768 ? 260 : 380;
+
+            cards.forEach((card, i) => {
+                let offset = i - index;
+
+                if (offset < -2) offset += gods.length;
+                if (offset > 2) offset -= gods.length;
+
+                let transform = "";
+                let opacity = "0";
+                let zIndex = "1";
+
+                if (offset === 0) {
+                    transform = `translate(-50%, -50%) translateX(0px) scale(${base < 576 ? 1.1 : 1.25})`;
+                    opacity = "1";
+                    zIndex = "5";
+                } else if (offset === -1) {
+                    transform = `translate(-50%, -50%) translateX(-${gap1}px) scale(1)`;
+                    opacity = "0.8";
+                    zIndex = "4";
+                } else if (offset === 1) {
+                    transform = `translate(-50%, -50%) translateX(${gap1}px) scale(1)`;
+                    opacity = "0.8";
+                    zIndex = "4";
+                } else if (offset === -2) {
+                    transform = `translate(-50%, -50%) translateX(-${gap2}px) scale(0.8)`;
+                    opacity = "0.5";
+                    zIndex = "3";
+                } else if (offset === 2) {
+                    transform = `translate(-50%, -50%) translateX(${gap2}px) scale(0.8)`;
+                    opacity = "0.5";
+                    zIndex = "3";
+                } else {
+                    transform = "translate(-50%, -50%) scale(0)";
+                    opacity = "0";
+                    zIndex = "0";
+                }
+
+                card.style.transform = transform;
+                card.style.opacity = opacity;
+                card.style.zIndex = zIndex;
+            });
+
+            updateHero();
+        }
+
+
+        function updateHero() {
+            const p = gods[index];
+            if (!p) return;
+
+            hero.style.backgroundImage =
+                `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url(${godBackgrounds[p.name]})`;
+            title.innerText = p.name.toUpperCase();
+            desc.innerText = p.desc;
+        }
+
+        document.getElementById("next").addEventListener("click", () => {
+            index = (index + 1) % gods.length;
+            updateCarousel();
+        });
+
+        document.getElementById("prev").addEventListener("click", () => {
+            index = (index - 1 + gods.length) % gods.length;
+            updateCarousel();
+        });
+
+        window.addEventListener("resize", () => {
+            updateCarousel();
+        });
+
+        document.getElementById("searchForm").addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const searchValue = document
+                .getElementById("searchInput")
+                .value
+                .toLowerCase()
+                .trim();
+
+            if (searchValue === "") return;
+
+            const foundIndex = gods.findIndex(god =>
+                god.name.toLowerCase().includes(searchValue)
+            );
+
+            if (foundIndex !== -1) {
+                index = foundIndex;
+                updateCarousel();
+            } else {
+                title.innerText = "NOT FOUND";
+                desc.innerText = "Try another search.";
+
+            }
+        });
+
+        loadGods();
+    </script>,
+    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js " integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI " crossorigin="anonymous "></script>
 </body>
 
 </html>
