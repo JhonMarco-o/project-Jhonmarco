@@ -120,69 +120,63 @@
 
 <body data-bs-theme="light">
 
-    <div class="hero" id="hero">
-
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container">
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                    </ul>
-                    <button class="btn btn-primary" id="modeBtn" onclick="switchTheme()">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container">
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                </ul>
+                <button class="btn btn-primary" id="modeBtn" onclick="switchTheme()">
                     Dark Mode
                   </button>
-                </div>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-xl-5">
-                    <div class="card my-2 shadow rounded-5 text-light p-3">
-                        <form class="d-flex" role="search" id="searchForm">
-                            <input class="form-control me-2" type="search" placeholder="Search Greek God..." aria-label="Search" id="searchInput" />
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-xl-5">
+                <div class="card my-2 shadow rounded-5 text-light p-3">
+                    <form class="d-flex" role="search" id="searchForm">
+                        <input class="form-control me-2" type="search" placeholder="Search Greek God..." aria-label="Search" id="searchInput" />
 
-                            <button class="btn btn-outline-success" type="submit">
+                        <button class="btn btn-outline-success" type="submit">
                             Search
                         </button>
-                        </form>
+                    </form>
+                </div>
+            </div>
+            <div class="col-12 col-xl-12 mt-2">
+                <div class="card shadow rounded-5 text-tertiary p-2 mb-2  bg-tertiary">
+                    <h2 class="text-center mb-2">GREEK GODS</h2>
+                </div>
+            </div>
+            <div class="col-12 col-xl-12 col-sm-12 mt-3 mb-5">
+                <div class="card shadow rounded-5 text-tertiary p-2 mb-2  bg-tertiary">
+                    <div class="hero-content text-body">
+                        <h1 id="title">Loading...</h1>
+                        <p id="desc">Fetching data...</p>
                     </div>
                 </div>
-                <div class="col-12 col-xl-12 mt-2">
-                    <div class="card shadow rounded-5 text-tertiary p-2 mb-2  bg-tertiary">
-                        <h2 class="text-center mb-2">GREEK GODS</h2>
+            </div>
+            <div class="col-12 col-xl-12 col-sm-12 col-md-12 p-5">
+                <div class="carousel mt-3">
+                    <div class="slider-wrapper">
+                        <div class="slider" id="slider"></div>
                     </div>
                 </div>
-                <div class="col-12 col-xl-12 col-sm-12 mt-3 mb-5">
-                    <div class="card shadow rounded-5 text-tertiary p-2 mb-2  bg-tertiary">
-                        <div class="hero-content text-body">
-                            <h1 id="title">Loading...</h1>
-                            <p id="desc">Fetching data...</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-xl-12 col-sm-12 col-md-12 p-5">
+            </div>
 
-                    <div class="carousel mt-3">
-                        <div class="slider-wrapper">
-                            <div class="slider" id="slider"></div>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="controllers p-5">
+                <button class="carousel-btn prev" id="prev">&#10094;</button>
+                <button class="carousel-btn next" id="next">&#10095;</button>
             </div>
         </div>
+    </div>
 
-        <div class="controllers p-5">
-            <button class="carousel-btn prev" id="prev">&#10094;</button>
-            <button class="carousel-btn next" id="next">&#10095;</button>
-        </div>
-    </div>
-    </div>
-    </div>
 
 
     <script>
